@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.shopping.etass_back.mapper.UploadFileMapper">
+
+    <insert id="insertFile" useGeneratedKeys="true" keyProperty="id" parameterType="cn.shopping.etass_back.entity.UploadFile">
+        insert into upload_file(CT,VKM,lsss)
+        values(#{ct},#{vkm},#{lsss})
+    </insert>
+
+    <select id="getFile" resultType="cn.shopping.etass_back.entity.UploadFile">
+        SELECT * FROM upload_File WHERE id IN
+        <foreach item="item" collection="list" index="index" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getFileId" resultType="java.lang.Integer">
+        SELECT file_id FROM file_kw WHERE kw IN
+        <foreach item="item" collection="array" index="index" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+        GROUP BY file_id
+    </select>
+
+<!--    <select id="yktestOrder" resultType="com.yuxun.fantuan.security.entity.User">-->
+<!--        select-->
+<!--        u.id,-->
+<!--        u.username-->
+<!--        FROM-->
+<!--        user u-->
+<!--        WHERE-->
+<!--        1 = 1-->
+<!--        <if test="null != ids and ids.size > 0">-->
+<!--            AND u.id IN-->
+<!--            <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">-->
+<!--                #{item}-->
+<!--            </foreach>-->
+<!--            order by field(u.id,-->
+<!--            <foreach item="item" index="index" collection="ids" separator=",">-->
+<!--                #{item}-->
+<!--            </foreach>-->
+<!--            )-->
+<!--        </if>-->
+<!--    </select>-->
+</mapper>
